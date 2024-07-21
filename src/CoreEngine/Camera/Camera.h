@@ -2,6 +2,7 @@
 
 class Camera{
     private:
+        Vec3D cPos;
         Vec3D cVel;
         int cXRot;
         int cYRot;

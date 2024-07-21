@@ -17,7 +17,7 @@ void AppWindow::onCreate(){
     
     if(Window::init()){
         CoreEngine::getCoreEngine()->init(renderer);
-        CoreEngine::getCoreEngine()->load("../ObjFiles/teapot.txt");
+        CoreEngine::getCoreEngine()->load("../ObjFiles/suzanne.txt");
 
         inputHandler.addInputListener(CoreEngine::getCoreEngine());
 

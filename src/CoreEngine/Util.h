@@ -22,6 +22,9 @@ struct Vec3D{
     Vec3D();
     void normalize();
     void rotate(Vec3D rotationAxis, float angle);
+    void rotateX(float angle);
+    void rotateY(float angle);
+    void rotateZ(float angle);
     Vec3D operator+(const Vec3D& rhs);
     Vec3D operator-(const Vec3D& rhs);
     Vec3D operator*(const float& rhs);

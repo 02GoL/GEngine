@@ -2,7 +2,6 @@
 #include"GraphicBuffers/VectorBuffer.h"
 #include"GraphicBuffers/IndexBuffer.h"
 #include"GraphicShaders/VertexShader.h"
-#include"../../FileHandler/FileParser.h"
 
 class GraphicEngine{
     private:
@@ -17,8 +16,15 @@ class GraphicEngine{
     public:
         GraphicEngine(){};
         ~GraphicEngine(){};
-        void init(); // add later
-        bool load(string dataPath);
+        void init(); 
         void render(SDL_Renderer* renderWindow);
         void compileShaders(Vec3D worldCamPos, int rotAngleX, int rotAngleY);
+        void setWorldSpace(Vec3D worldSpace);
+        VectorBuffer* getVectorBuffer(){
+            return vectorBuffer;
+        }
+        IndexBuffer* getIndexBuffer(){
+            return indexBuffer;
+        }
+
 };

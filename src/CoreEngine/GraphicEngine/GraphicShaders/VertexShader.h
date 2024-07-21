@@ -15,18 +15,20 @@ class VertexShader{
                 setTransformation(*it,worldCamPos);
             }
         }
-        void setWorldSpace(Vec3D& vector){
-
+        void setWorldSpace(vector<Vec3D>* vectors, Vec3D worldOff){
+            for(auto it = vectors->begin(); it != vectors->end(); it++){
+                *it += worldOff;
+            }
         }
         void setTransformation(Vec3D& vector, Vec3D worldCamPos){
             vector -= worldCamPos;
         }
         void setRotation(Vec3D& vector, float rotAngleX, float rotAngleY){
             if(rotAngleX != 0){
-                vector.rotate(Vec3D(1,0,0),rotAngleX*0.01);
+                vector.rotateX(rotAngleX*0.01);
             }
             if(rotAngleY != 0){
-                vector.rotate(Vec3D(0,1,0),rotAngleY*0.01);
+                vector.rotateY(rotAngleY*0.01);
             }
         }
         void setViewSpace(Vec3D& vector){

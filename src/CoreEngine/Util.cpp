@@ -234,7 +234,24 @@ void Vec3D::rotate(Vec3D rotationAxis, float angle){
     Vec3D v = Vec3D(this->x,this->y,this->z);
     *this = u*2*getDot(u,v) + v*(pow(w,2)-getDot(u,u)) + getCross(u,v)*2*w;
 }
-
+void Vec3D::rotateX(float angle){
+    float w = cos(angle/2);
+    Vec3D u = Vec3D(1,0,0)*sin(angle/2);
+    Vec3D v = Vec3D(this->x,this->y,this->z);
+    *this = u*2*getDot(u,v) + v*(pow(w,2)-getDot(u,u)) + getCross(u,v)*2*w;
+}
+void Vec3D::rotateY(float angle){
+    float w = cos(angle/2);
+    Vec3D u = Vec3D(0,1,0)*sin(angle/2);
+    Vec3D v = Vec3D(this->x,this->y,this->z);
+    *this = u*2*getDot(u,v) + v*(pow(w,2)-getDot(u,u)) + getCross(u,v)*2*w;
+}
+void Vec3D::rotateZ(float angle){
+    float w = cos(angle/2);
+    Vec3D u = Vec3D(0,0,1)*sin(angle/2);
+    Vec3D v = Vec3D(this->x,this->y,this->z);
+    *this = u*2*getDot(u,v) + v*(pow(w,2)-getDot(u,u)) + getCross(u,v)*2*w;
+}
 Vec3D Vec3D::operator+(const Vec3D& rhs){
     return Vec3D(x+rhs.x,y+rhs.y,z+rhs.z);
 }

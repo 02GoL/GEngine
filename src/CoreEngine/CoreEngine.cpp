@@ -11,13 +11,23 @@ void CoreEngine::init(SDL_Renderer* renderWindow){
 }
 
 bool CoreEngine::load(string dataPath){
-    return graphicEngine.load(dataPath);
+    FileParser* fileParser = new FileParser();
+    if(fileParser->loadData(dataPath)){
+        graphicEngine.getVectorBuffer()->load(fileParser->getVectorData());
+        graphicEngine.getIndexBuffer()->load(fileParser->getTriMesh());
+        //graphicEngine.setWorldSpace(Vec3D(0,0,-2));
+        delete fileParser;
+        return true;
+    }else{
+        delete fileParser;
+        return false;
+    }
 }
 
 void CoreEngine::update(){
     graphicEngine.compileShaders(camera.getCamVel(),camera.getCamRotX(),camera.getCamRotY());
     graphicEngine.render(renderWindow);
-    camera.update();
+    //camera.update();
 }
 
 void CoreEngine::onKeyDown(set<SDL_Keycode> keyboardInputs, SDL_Keycode key){
@@ -45,9 +55,33 @@ void CoreEngine::onKeyDown(set<SDL_Keycode> keyboardInputs, SDL_Keycode key){
             }
         }
     }
+    if(key == SDLK_UP){
+        camera.setXRot(-1);
+    }
+    if(key == SDLK_DOWN){
+        camera.setXRot(1);
+    }
+    if(key == SDLK_RIGHT){
+        camera.setYRot(-1);
+    }
+    if(key == SDLK_LEFT){
+        camera.setYRot(1);
+    }
 }
 
 void CoreEngine::onKeyUp(set<SDL_Keycode> keyboardInputs, SDL_Keycode key){
+    if(key == SDLK_UP){
+        camera.setXRot(0);
+    }
+    if(key == SDLK_DOWN){
+        camera.setXRot(0);
+    }
+    if(key == SDLK_RIGHT){
+        camera.setYRot(0);
+    }
+    if(key == SDLK_LEFT){
+        camera.setYRot(0);
+    }
     if(key == SDLK_a || key == SDLK_d){
         if(!keyboardInputs.count(SDLK_a) && keyboardInputs.count(SDLK_d)){
             camera.setX(1);
@@ -73,8 +107,8 @@ void CoreEngine::onMouseInput(int mouseInput){
 }
 
 void CoreEngine::onMouseMotion(int mouseX, int mouseY){
-    camera.setXRot(mouseY);
-    camera.setYRot(mouseX);
+    //camera.setXRot(-mouseY);
+    //camera.setYRot(-mouseX);
     /*
     graphicEngine.getVertexShader().compileVectorShader
         (&graphicEngine.getVectorBuffer().getVectors(),Vec3D(1,0,0),-mouseY*0.01);

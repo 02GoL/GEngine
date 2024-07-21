@@ -2,6 +2,7 @@
 #include<SDL2/SDL.h>
 #include"GraphicEngine/GraphicEngine.h"
 #include"../InputHandler/InputListener.h"
+#include"../FileHandler/FileParser.h"
 #include"Camera/Camera.h"
 
 using namespace std;

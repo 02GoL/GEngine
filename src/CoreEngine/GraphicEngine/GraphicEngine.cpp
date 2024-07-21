@@ -9,22 +9,12 @@ void GraphicEngine::init(){
     vertexShader = new VertexShader();
 }
 
-bool GraphicEngine::load(string dataPath){
-    FileParser* fileParser = new FileParser();
-    if(fileParser->loadData(dataPath)){
-        vectorBuffer->load(fileParser->getVectorData());
-        indexBuffer->load(fileParser->getTriMesh());
-        delete fileParser;
-        return true;
-    }else{
-        delete fileParser;
-        return false;
-    }
-}
-
 void GraphicEngine::compileShaders(Vec3D worldCamPos, int rotAngleX, int rotAngleY){
     vertexShader->compileVectorShader(&vectorBuffer->getVectors(),worldCamPos,rotAngleX,rotAngleY);
     //pixel shader
+}
+void GraphicEngine::setWorldSpace(Vec3D worldSpace){
+    vertexShader->setWorldSpace(&vectorBuffer->getVectors(),worldSpace);
 }
 
 void GraphicEngine::render(SDL_Renderer* renderWindow){
